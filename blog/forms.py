@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from .models import Blog
 
 class Signup(UserCreationForm):
     email = forms.CharField(widget=forms.EmailInput,required=True)
@@ -13,3 +14,9 @@ class Signup(UserCreationForm):
         labels = {'email':'Email'}
 
 # R9865177862
+
+
+class Blogform(forms.ModelForm):
+    class Meta:
+        model = Blog
+        fields = "__all__"

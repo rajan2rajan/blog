@@ -1,5 +1,5 @@
 from django.shortcuts import render,HttpResponseRedirect
-from .forms import Signup
+from .forms import Signup,Blogform
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
 
@@ -17,7 +17,8 @@ def contactus(request):
     return render(request, 'contactus.html')
 
 def dashboard(request):
-    return render(request, 'dashboard.html')
+    form = Blogform()
+    return render(request, 'dashboard.html',{"form":form})
 
 
 def signuppage(request):
