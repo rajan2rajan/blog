@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    
+    <form action="" method="post" novalidate>
+        {% csrf_token %}
+        {% for form in form %}
+          {{form.label_tag}} {{form}}  {{form.errors|striptags}} <br><br>
+        {% endfor %}
+        
+        <a href=""><button type="submit">signup</button></a>
+
+    </form>
+
+{% endblock content %}
+    
