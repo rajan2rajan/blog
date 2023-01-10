@@ -2,7 +2,8 @@ from django.shortcuts import render,HttpResponseRedirect
 from .forms import Signup,Blogform
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
-
+from .models import Blog
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -10,16 +11,26 @@ def aboutus(request):
     return render(request , 'aboutus.html')
 
 def home(request):
-    return render(request , 'home.html')
+    forms =Blog.objects.all()
+    return render(request , 'home.html',{"form":forms})
 
 def contactus(request):
 
     return render(request, 'contactus.html')
 
 def dashboard(request):
-    form = Blogform()
-    return render(request, 'dashboard.html',{"form":form})
+    if request.user.is_authenticated:
+        if request.method=="POST":
+            data = Blogform(request.POST , request.FILES)
+            if data.is_valid():
+                data.save()
+                return HttpResponseRedirect('/home/')
 
+        else:
+            data = Blogform()
+        return render(request, 'dashboard.html',{'form':data})
+    else:
+        return HttpResponseRedirect('/loginpage/')
 
 def signuppage(request):
     if not request.user.is_authenticated:

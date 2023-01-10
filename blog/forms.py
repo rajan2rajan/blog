@@ -1,4 +1,5 @@
 from django import forms
+import datetime
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import Blog
@@ -17,6 +18,7 @@ class Signup(UserCreationForm):
 
 
 class Blogform(forms.ModelForm):
+    date = forms.DateField(label="publish date",initial = datetime.date.today())
     class Meta:
         model = Blog
-        fields = "__all__"
+        fields =['title','imagefields','describe','date']

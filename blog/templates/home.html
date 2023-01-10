@@ -2,6 +2,12 @@
 
 
 {% block content %}
-    this is home section and we are adding items here
+    {% for form in form %}
+        {{from.title}} <br><br>
+        <img src="/media/{{ form.imagefields }}" width="500" height="200"><br><br>
+        {{form.describe}}<br><br>
+        {{form.date}}<br><br>
+    {% endfor %}
+
 {% endblock content %}
     
