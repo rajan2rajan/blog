@@ -3,9 +3,9 @@
 
 {% block content %}
     {% for form in form %}
-        {{from.title}} <br><br>
-        <img src="/media/{{ form.imagefields }}" width="500" height="200"><br><br>
-        {{form.describe}}<br><br>
+        {{form.title}} <br><br>
+        <img src="/media/{{ form.imagefields }}" width="600" height="700"><br><br>
+        {{form.describe|safe}}<br><br>
         {{form.date}}<br><br>
     {% endfor %}
 

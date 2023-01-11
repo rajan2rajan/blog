@@ -1,13 +1,35 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
-    <form method="POST"enctype="multipart/form-data"  novalidate>
-        {% csrf_token %}
-        {% for form in form %}
-        {{form.label}} {{form}}{{form.errors|striptags}} <br><br>
-        {% endfor %}
-        <input type="submit" value="Submit">
-    </form>
+<h3>Welcome {{username}}</h3>
+{% if perms.blog.add_blog %}
+<a href="{% url 'addpost'%}"><button>add post</button></a>
+{% endif %}
+            <table>
+                <tr>
+                  <th>title</th>
+                  <th>describe</th>
+                  <!-- <th>imagefields</th> -->
+                  <th>date</th>
+                  {% if perms.blog.delete_blog and perms.blog.change_blog  %}
+                  <th>operation</th>
+                  {% endif %}
+                </tr>
+               
+                    {% for result in result %}
+                 <tr>        
+                        <th>{{result.title}}</th>
+                        <!-- <th>{{result.imagefields}}</th> -->
+                        <th>{{result.describe|safe}}</th>                    
+                        <th>{{result.date}}</th>
+                        {% if perms.blog.delete_blog and perms.blog.change_blog %}
+                        <th><a href="{% url 'editpage' result.id%}"><button>edit</button></a>
+                          <a href="{% url 'deletepage' result.id%}"><button>delete</button></a>
+                        {% endif %}
+
+                </tr>      
+                    {% endfor %}
+                    
+                
+            </table>
 {% endblock content %}
-    

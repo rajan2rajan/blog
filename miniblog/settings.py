@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     # third party application
     'tinymce',
+    'ckeditor'
 ]
 
 MIDDLEWARE = [
